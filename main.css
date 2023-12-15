@@ -67,3 +67,7 @@ a:active{
 a:visited{
     color:green;
 }
+
+main{
+    margin: 10px 20px ;
+}
