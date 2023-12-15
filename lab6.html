@@ -6,13 +6,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Боков А.К. Лабораторная 6</title>
     <link rel="stylesheet" href="main.css">
+    <style>
+        .game{
+            border: 1px solid;
+            border-radius: 30px;
+            padding: 10px 20px 10px 20px;
+            margin: 20px auto;
+            width: 250px;
+            text-align: center;
+        }
+        .rules{
+            border: 1px solid;
+            border-radius: 30px;
+            padding: 10px 20px 10px 20px;
+            background-color: darkgray;
+            border-color: darkgray;
+
+        }
+        .color{
+            border: 1px solid;
+            padding: 10px 20px 10px 20px;
+            margin-top: 10px;
+            width: 200px;
+            text-align: center;
+            background-color: yellow;
+            
+        }
+        .change {
+            border: 1px black solid;
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: chartreuse;
+            color: black;
+            transition: 3s;
+            margin-top: 10px;
+        }
+        .change:hover {
+            cursor: pointer;
+        }
+        .size {
+            border: 1px black solid;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: cyan;
+            color: black;
+            transition: 1s;
+            margin-top: 10px;
+        }
+        .size {
+            cursor: pointer;
+        }
+       
+    </style>
+    <script>
+        let number;
+        let count = 0;
+        function startGame() {
+            number = Math.floor (Math.random() * 100) + 1;
+            let screens = document.getElementsByClassName('game');
+            screens[0].style.display = 'none';
+            screens[1].style.display = 'block';
+        }
+        function guess() {
+            count++;
+            let input = document.getElementById('user-number');
+            let userNumber = parseInt(input.value);
+            let message = document.getElementById('result');
+            if(userNumber > number) {
+                message.innerHTML = 'Вы ввели слишком большое число';
+            }
+            else if (userNumber < number) {
+                message.innerHTML = 'Вы ввели слишком маленькое число';
+            }
+            else {
+                let screens = document.getElementsByClassName('game');
+                screens[1].style.display = 'none';
+                screens[2].style.display = 'block';
+                let displayNumber = document.getElementById('number');
+                displayNumber.innerHTML = number;
+                document.getElementById('try-count').innerHTML = count;
+            }
+
+        }
+        function again(params) {
+            let screens = document.getElementsByClassName('game');
+            screens[2].style.display = 'none';
+            screens[1].style.display = 'block';
+            number = Math.floor (Math.random() * 100) + 1;
+            count = 0;
+            result.remove();
+        }
+        function Rules() {
+            let screens = document.getElementsByClassName('rules');
+            screens[0].style.display = 'none';
+            screens[1].style.display = 'block';
+        }
+        function removeRules() {
+            let screens = document.getElementsByClassName('rules');
+            screens[1].style.display = 'none';
+            screens[0].style.display = 'block';
+        }
+        function changeColor(div) {
+            if(div.style.backgroundColor == 'yellow') {
+                div.style.backgroundColor = 'red';
+                div.style.color= 'black';
+                document.getElementById('color-name').innerHTML = 'красный';
+                document.getElementById('colorText-name').innerHTML = 'чёрный';
+            }
+            else if(div.style.backgroundColor == 'red') {
+                div.style.backgroundColor = 'black';
+                div.style.color= 'white';
+                document.getElementById('color-name').innerHTML = 'чёрный';
+                document.getElementById('colorText-name').innerHTML = 'белый';
+            }
+            else if(div.style.backgroundColor == 'black') {
+                div.style.backgroundColor = 'green';
+                div.style.color= 'yellow';
+                document.getElementById('color-name').innerHTML = 'зелёный';
+                document.getElementById('colorText-name').innerHTML = 'жёлтый';
+            }
+            else if(div.style.backgroundColor == 'green') {
+                div.style.backgroundColor = 'purple';
+                div.style.color= 'red';
+                document.getElementById('color-name').innerHTML = 'фиолетовый';
+                document.getElementById('colorText-name').innerHTML = 'красный';
+            }
+            else {
+                div.style.backgroundColor = 'yellow';
+                document.getElementById('color-name').innerHTML = 'жёлтый';
+                div.style.color= 'purple';  
+                document.getElementById('colorText-name').innerHTML = 'фиолетовый';
+            }
+        }
+        let positionLeft = true;
+        function move() {
+            let position = document.getElementById('place');
+            if (positionLeft == true) {
+                position.style.transform = 'translateX(500px) rotate(0)';
+                positionLeft = false;
+            }
+            else {
+                position.style.transform = 'translateX(0px) rotate(4turn)';
+                positionLeft = true;
+            }
+        }
+        function expansion(size) {
+           let isSize = parseInt(getComputedStyle(size).width);
+            if(isSize < 1000) {
+                size.style.width = isSize + 50 + 'px';
+            }
+            else {
+                size.style.width = '100px';
+            }
+        }
+        function filter() {
+            let color = document.getElementById('wear-color').value;
+            let type = document.getElementById('wear-type').value;
+            let wear = document.getElementById('wear');
+
+            if(color == 'Красный' && type == 'Футболка') {
+                wear.src = 'https://ulrid.ru/image/cache/catalog/8c9b044b44c311e980f90050569b1703_15dae130458e11e980f90050569b1703-1000x1000.jpg';
+            }
+            else if(color == 'Красный' && type == 'Поло') {
+                wear.src = 'https://1souvenir.ru/d/3000/d/11575.50__1__1000x1000.jpg';
+            } 
+            else if(color == 'Красный' && type == 'Майка') {
+                wear.src = 'https://main-cdn.sbermegamarket.ru/hlr-system/-17/008/391/902/114/51/100030474551b0.jpg';
+            }
+            else if(color == 'Белый' && type == 'Футболка') {
+                wear.src = 'https://www.tekstil-vsem.ru/images/product/s/105882a4080.jpg';
+            }
+            else if(color == 'Белый' && type == 'Поло') {
+                wear.src = 'https://cdn1.ozone.ru/multimedia/1018703338.jpg';
+            }
+            else if(color == 'Белый' && type == 'Майка') {
+                wear.src = 'https://www.tekstil-vsem.ru/images/product/s/929191577b.jpg';
+            }
+            else if(color == 'Чёрный' && type == 'Футболка') {
+                wear.src = 'https://1souvenir.ru/d/3000/d/fbe10b5a-212e-11e7-942a-00155d640301.jpg';
+            }
+            else if(color == 'Чёрный' && type == 'Поло') {
+                wear.src = 'https://img.five-sport.ru/images/products/1/3578/54455802/%D0%A4%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0_Craft_Pique_Classic_%D0%B6%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F.jpg';
+            }
+            else if(color == 'Чёрный' && type == 'Майка') {
+                wear.src = 'https://www.dassimisi.ru/userfiles/image/catalog/photoimg_182850341.jpg';
+            }
+            else {
+                wear.src = 'ssss';
+            }
+        }
+            
+            
+    </script>
 </head>
+
 <body>
     <header>
-        НГТУ, ФБ, Лабораторная работа 5
+        НГТУ, ФБ, Лабораторная работа 6
     </header>
     <main>
+        <div class="game">
+            <button onclick="startGame()">
+                Сыграть в игру
+            </button>
+        </div>
+        <div class="game" style="display: none;">
+            <h1>Угадай число!</h1>
+            <div>
+                Задумано число от 1 до 100. Угадайте какое?<br>
+                <input type="number" value="" min="1" max="100" id="user-number"><br>
+                <button onclick="guess()">
+                Угадать
+                </button>
+                <div id="result"></div>
+            </div>
+        </div>
+        <div class="game" style="display: none;">
+            <h1>Поздравляем, вы выиграли!</h1>
+            <div>
+                Задуманное число: <span id="number"></span>
+            </div>
+            <div>Количество попыток: <span id="try-count"></span>
+            </div>
+            <div>
+                <button onclick="again()">Сыграть еще раз</button>
+            </div> 
+        </div>
+        <div class="rules">
+            <button onclick="Rules()">Показать правила игры</button>
+        </div>
+         <div class="rules" style="display: none;">
+            <div>
+                <button onclick="removeRules()">Скрыть правила игры</button><br>
+                <ol type="A">
+                <li>Нажмите на кнопку "сыграть в игру"</li>
+                <li>Введите число от 1 до 100</li>
+                <li>Нажмите на кнопку угадать</li>
+                <li>Если появилось сообщение "Вы ввели слишком маленькое число", то введите число больше</li>
+                <li>Если появилось сообщение "Вы ввели слишком большое число", то введите число меньше</li>
+                <li>Если вы угадали число, то появится сообщение "Поздравляем, вы выиграли"</li>
+                <li>Чтобы сыграть еще раз, нажмите кнопку "Сыграть еще раз"</li>
+                </ol>
+              </div>
+        </div>
+        <div class="color" ondblclick="changeColor(this)">
+            Цвет фона: <span id="color-name">жёлтый</span><br>
+            Цвет текста:<span id="colorText-name">фиолетовый</span><br>
+            Сделайте двойной щелчок, чтобы сменить.
+        </div>
+        <div class="change" id="place" onclick="move()">
+            <span ><p vertical-align: middle>Щёлкни меня</p></span>
+        </div>
+        <div  class="size"  onclick="expansion(this)">
+            <span ><p vertical-align: middle>Сделай меня шире</p></span>
+        </div>
+        <div class="shop">
+            <div class="nameshop">
+                <h1>Интернет-магазин Wildberries</h1>
+                <img src="https://free-png.ru/wp-content/uploads/2021/11/free-png.ru-419.png" height="50px" width="50px">
+            </div>
+        </div>
+            Цвет одежды:
+            <select id="wear-color">
+                <option>Красный</option>
+                <option>Белый</option>
+                <option>Чёрный</option>
+            </select><br>
+            Тип одежды:
+            <select id="wear-type">
+                <option>Футболка</option>
+                <option>Поло</option>
+                <option>Майка</option>
+            </select><br>
 
+            <button onclick="filter()">ОК</button><br>
+
+            <img id="wear">
+        </div>
     </main>
     <footer>
         &copy;Боков А.К., ФБИ-12, 3 курс, 2023
