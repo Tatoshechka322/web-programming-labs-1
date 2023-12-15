@@ -25,6 +25,7 @@ footer{
 a{
     color: green; 
     text-decoration: none;
+    transition: text-shadow,color, text-duration,background-color,font-weight,3s;
 }
 
 a:hover{
@@ -32,6 +33,7 @@ a:hover{
     background-color: lightgreen;
     text-decoration: underline;
     font-weight: bold;
+    transition: all 0.3s;
 }
 
 a:active{
