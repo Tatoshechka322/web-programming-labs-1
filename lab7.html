@@ -6,13 +6,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Боков А.К. Лабораторная 7</title>
     <link rel="stylesheet" href="main.css">
+    <script>
+        function addBlocks() {
+            let blocks = document.getElementById('blocks');
+            for(let i=0; i<10; i++){
+                let block = document.createElement('div');
+                block.innerHTML = 'Блок №' +(i+1) + ': ' +(2*i**2);
+                blocks.appendChild(block);
+            }
+        }
+        function showExchange() {
+            let exchange=[70.5174, 70.1217, 70.0414, 70.3847, 70.5991, 70.8924, 
+                        71.5763, 72.8949, 72.7923, 73.6307];
+            let table=document.getElementById('dollar-exchange');
+            for(let i=0; i<exchange.length; i++){
+                let tr = document.createElement('tr');
+                let td = document.createElement('td');
+                td.innerHTML = exchange[i];
+                tr.appendChild(td);
+                table.appendChild(tr);
+            }
+            let sum=0;
+            for(let i=0; i<exchange.length; i++){
+                sum = sum + exchange[i];
+            }
+            let average = sum / exchange.length;
+            document.getElementById('detail').innerHTML='Среднее значение: ' + average;
+        }
+
+        function opacityBlock(){
+            let opacity = document.getElementById('opacity-block');
+            for (let i = 0; i < 10; i++){
+                let blockCreate = document.createElement('div');
+                blockCreate.style.opacity = (i * 10) + '%';
+                blockCreate.style.width = '100px';
+                blockCreate.style.height = '100px';
+                blockCreate.style.backgroundColor = 'green';
+                opacity.appendChild(blockCreate);
+            }
+        }
+
+        function Circles(){
+            let swither = 0;
+            let circleInput = document.getElementById('circleInput');
+            let redButton = document.getElementById('redButton');
+            let container = document.getElementById('circleContainer');
+            let circleCount = parseInt(circleInput.value);
+            for (let i = 0; i<circleCount; i++){
+            let circle = document.createElement('div');
+            if (swither == 0){
+                circle.style.backgroundColor = 'red';
+                swither = 1;
+            }
+            else{
+                circle.style.backgroundColor = 'green';
+                swither = 0;
+            }
+            circle.style.paddingTop = '32px';
+            circle.style.paddingBottom = '32px';
+            circle.style.paddingLeft = '36px';
+            circle.style.paddingRight = '36px';
+            circle.style.display = 'inline-block';
+            circle.style.borderRadius = '200px';
+            circle.innerText = circleCount -i;
+            circle.style.marginRight = '12px';
+            container.appendChild(circle);
+            }
+        }
+
+
+        function Table1() {
+            let umnozh1 = document.getElementById('umnozh1');
+            for(let i=13; i<34; i++){
+                let umnoz = document.createElement('div');
+                umnoz.innerHTML = (i+'* 28 = '+(28*i));
+                umnozh1.appendChild(umnoz);
+            }
+        }
+
+        function Table2() {
+            let umnozh2 = document.getElementById('umnozh2');
+            for(let i=13; i<34; i++){
+                let umnoz = document.createElement('div');
+                umnoz.innerHTML = (i+'* 59 = '+(59*i));
+                umnozh2.appendChild(umnoz);
+            }
+        }
+
+        function Kurs(){
+            let date=['23.05.2023', '22.05.2023', '19.05.2023', '18.05.2023', '17.05.2023', '16.05.2023', '15.05.2023', '12.05.2023', '11.05.2023', '10.05.2023'];
+            let change=[1642.00, 1665.00, 1679.00, 1680.00, 1469.00, 1470.00, 1483.00, 1470.00, 1423.50, 1397.00];
+            let razn=['-',1665.00-1642.00, 1679.00-1665.00,1680.00-1679.00,1469.00-1680.00,1470.00- 1469.00,1483.00-1470.00,1470.00-1483.00,
+            1423.50-1470.00,1397.00-1423.50]
+
+            let table=document.getElementById('kurs-exchange'); 
+            for (i = 0; i <change.length; i++){
+                let tr = document.createElement("tr");
+                let td1 = document.createElement("td");
+                td1.innerHTML = date[i];
+                let td2 = document.createElement("td");
+                td2.innerHTML = change[i];
+                let td3 = document.createElement("td");
+                td3.innerHTML = razn[i];
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                table.appendChild(tr);
+            }
+            let sum=0;
+            for(let i=0; i<change.length; i++){
+                sum = sum+change[i];
+            }
+            let average = sum / change.length;
+            let min = Math.min.apply(Math,change)
+            let max = Math.max.apply(Math,change)
+            document.getElementById('details').innerHTML='Среднее значение: ' + average +"<br />"+ 'Минимальное значение: ' + min +"<br />" +'Максимальное значение: ' + max;
+        }
+        
+        function Kurs2(){
+            let date=['23.05.2023', '22.05.2023','20.05.2023','19.05.2023', '18.05.2023', '17.05.2023', '16.05.2023', '15.05.2023', '13.05.2023', '12.05.2023'];
+            let change=[571,593,618,599,654,666,676,684,671,672];
+            let razn=['-',593-571,618-593,599-618,654-599,666-654,676-666,684-676,671-684,672-671]
+
+            let table=document.getElementById('kurs-exchange2'); 
+            for (i = 0; i <change.length; i++){
+                let tr = document.createElement("tr");
+                let td1 = document.createElement("td");
+                td1.innerHTML = date[i];
+                let td2 = document.createElement("td");
+                td2.innerHTML = change[i];
+                let td3 = document.createElement("td");
+                td3.innerHTML = razn[i];
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                table.appendChild(tr);
+            }
+            let sum=0;
+            for(let i=0; i<change.length; i++){
+                sum = sum+change[i];
+            }
+            let average = sum / change.length;
+            let min = Math.min.apply(Math,change)
+            let max = Math.max.apply(Math,change)
+            document.getElementById('details2').innerHTML='Среднее значение: ' + average +"<br />"+ 'Минимальное значение: ' + min +"<br />" +'Максимальное значение: ' + max;
+        }
+
+    </script>
 </head>
 <body>
     <header>
-
+        НГТУ, ФБ, Лабораторная работа 7
     </header>
     <main>
+        <button onclick="addBlocks()">Создать блоки</button>
+        <div id="blocks"></div>
 
+        <button onclick="showExchange()">Курс доллара</button>
+        <table border="1" id="dollar-exchange"></table>
+        <div id="detail"></div>
+
+        <button onclick="opacityBlock()">Создать полупрозрачные блоки</button>
+        <div id="opacity-block"></div>
+
+        <input type="number" id="circleInput" value="5" placeholder="Введите число кругов">
+        <button id="redButton" onclick="Circles()">Красное/Зелёное</button>
+        <div id="circleContainer"></div>
+
+        <button onclick="Table1()">Таблица умножения на 28</button>
+        <div id="umnozh1"></div>
+
+        <button onclick="Table2()">Таблица умножения на 59</button>
+        <div id="umnozh2"></div>
+
+        <button onclick="Kurs()">Курс акций АНК «Башнефть»</button>
+        <table border="1" id="kurs-exchange"></table>
+        <div id="details"></div>
+
+        <button onclick="Kurs2()">Курс акций "Полиметалл"</button>
+        <table border="1" id="kurs-exchange2"></table>
+        <div id="details2"></div>
     </main>
     <footer>
         
